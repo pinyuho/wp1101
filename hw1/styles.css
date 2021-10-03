@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Gayathri&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Gayathri", sans-serif;
+}
+
+body {
+    background: ivory;
+}
+
+h1 {
+    left: 100px;
+    padding-left: auto;
+}
+
+#showcase {
+    margin: auto;
+    background: aqua;
+    width: auto;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    /* flex-direction: row;*/
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    /* position: relative; */
+    /* justify-content: flex-start; */
+    /* align-items: flex-end; */
+    /* flex-wrap: wrap; */
+    background: url("cover.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    flex-wrap: wrap;
+    /*filter: blur(3px);*/
+    animation: shake 3s infinite;
+}
+
+.ml13 {
+    font-size: 1.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+    font-weight: 600;
+}
+  
+.ml13 .letter {
+    display: inline-block;
+    line-height: 1em;
+}
+
+.item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin: 30px;
+    padding: 30px;
+    transition: all 2s ease;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: x-large;
+    line-height: 40px;
+}
+
+.animated-item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin: 30px;
+    padding: 30px;
+    transition: all 2s ease;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: x-large;
+    line-height: 40px;
+}
+
+.animated-item:hover {
+    color: rgba(120, 135, 153, 0.801);
+    transition: 0.3s;
+    margin: 0 auto;
+}
+
+.text {
+    width: auto;
+    height: auto;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black;
+    margin: auto;
+    padding: 300px;
+    transition: all 2s ease;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: x-large;
+    line-height: 40px;
+}
+
+.bob-container{
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.bob-row{
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.bob-row:before,.bob-row:after{
+  display: table;
+  content: " ";  
+}
+
+.bob-row:after{
+  clear: both;
+}
+
+/*2個並排 不管在任何尺寸都會2個並排*/
+.bob-2item{
+  width:50%;
+}
+
+/*3個並排 在767px以下會垂直排列*/
+.bob-3item{
+  width: 100%;
+}
+/*4個並排 在767px以下會2個排列*/
+.bob-4item{
+  width:50%;
+}
+
+.bob-2item,.bob-3item,.bob-4item{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float:left;
+}
+
+.bob-2item img,.bob-3item img,.bob-4item img{
+  width:100%;
+  display: block;
+}
+
+.bob-4item:hover {
+    opacity: 0.5;
+    transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  .bob-container {
+    width: 750px;
+  }
+  .bob-3item{
+    width: 33.33333333%;
+  }
+  .bob-4item{
+    width:25%;
+  }
+}
+@media (min-width: 992px) {
+  .bob-container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .bob-container {
+    width: 1170px;
+  }
+}
+
+
+
+
+
