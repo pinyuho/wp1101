@@ -74,13 +74,53 @@ h1 {
     letter-spacing: 2px;
 }
 
+.block-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.block-container img{
+  padding: 10px;
+  width: auto;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+}
+
+.block img {
+  padding: 10px;
+  width: auto;
+}
+
+.block img:hover{
+  opacity: 0.5;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.small img {
+  height: 250px;
+  width: auto;
+}
+
+.album img{
+  /* width: auto; */
+  height: 15px;
+  padding: 30px;
+  margin: auto;
+}
+
 /* 多個並排的圖片/文字 section */
 .bob-container{
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 100px;
-  /* padding: 15px; */
 }
 
 .bob-row{
@@ -97,10 +137,9 @@ h1 {
   clear: both;
 }
 
-/* RWD */
 /*2個並排 不管在任何尺寸都會2個並排*/
 .bob-2item{
-  width:50%;
+  width: 50%;
 }
 
 /*3個並排 在767px以下會垂直排列*/
@@ -157,6 +196,7 @@ h1 {
 .bob-4item:hover {
     opacity: 0.5;
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 /* 相片大圖 */
@@ -178,6 +218,11 @@ h1 {
 }
 
 /* RWD */
+@media (max-width: 768px) {
+  .block-container{
+    flex-wrap: wrap;
+  }
+}
 @media (min-width: 768px) {
   .bob-container {
     width: 750px;
@@ -186,7 +231,7 @@ h1 {
     width: 33.33333333%;
   }
   .bob-4item{
-    width:25%;
+    width: 25%;
   }
 }
 @media (min-width: 992px) {
