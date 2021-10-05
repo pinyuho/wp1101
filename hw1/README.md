@@ -11,7 +11,7 @@
     - 相片展⽰窗格 (⼤圖): 滑鼠移動到上面，則圖片會有陰影、放大、以及左右搖動的動畫
 
 - Albums
-    - 相簿選擇區塊: 滑鼠移動到上面，則圖片會變透明、放大、滑鼠游標變為pointer (可點按的提示)
+    - 相簿選擇區塊: 滑鼠移動到上面，則圖片會變模糊並且出現相簿名稱跟敘述、滑鼠游標變為pointer (可點按的提示)
 
 ### Additional Feature
 
@@ -29,3 +29,4 @@
     - [multiple pics](https://codepen.io/bob-cat/pen/XdbEaa)
     - [text animation](https://tobiasahlin.com/moving-letters/)
     - [flexbox tutorial](https://nomichuang.medium.com/css-flex-%E5%B1%AC%E6%80%A7-ea2c1db1f925)
+    - [blur photo](https://codepen.io/dcode-software/pen/XWXVYgR)

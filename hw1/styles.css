@@ -308,6 +308,7 @@ h1 {
 
 .image__overlay:hover {
   opacity: 1;
+  cursor: pointer;
 }
 
 .image__overlay:hover > * {
