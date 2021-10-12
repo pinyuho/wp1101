@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
+
+        <!-- cover -->
         <div id="showcase">
             <div class="item"> 
                 My Photo Album 
@@ -35,25 +37,71 @@
         </div>
 
         
+
+        <!-- 2個並排 (album) -->
+        <div class="bob-container"> 
+            <h1> albums </h1>
+            <div class="block-container">
+                <div class="block"> 
+
+                    <div class="image" onclick="selectAlbum(0)">
+                        <img class="image__img" src="https://ec.europa.eu/newsroom/repository/picture/2016-18/travel_16-17_photo_c_13224.jpg">
+                        <div class="image__overlay image__overlay--blur">
+                            <div class="image__title"> Travel </div>
+                            <p class="image__description">
+                                Best memories with family.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- <img src="pics/main.jpeg"> -->
+                </div>
+
+                <div class="block small"> 
+                    <div class="image" onclick="selectAlbum(1)">
+                        <img class="image__img" src="https://beta.ctvnews.ca/content/dam/ctvnews/images/2019/11/18/1_4691731.png?cache_timestamp=1574134871525">
+                        <div class="image__overlay image__overlay--blur">
+                            <div class="image__title"> Cute Cats </div>
+                            <p class="image__description">
+                                CAAAAT gooooood!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="image" onclick="selectAlbum(2)">
+                        <img class="image__img" src="https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Foriginal%2F000%2F020%2F002%2Fmemeeman.jpg">
+                        <div class="image__overlay image__overlay--blur">
+                            <div class="image__title"> Others </div>
+                            <p class="image__description">
+                                Photos cannot be categorised.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
         <div class="bob-container"> 
             
             <!-- 相片小圖 -->
-            <h1> photos </h1>
+            <h1> album preview </h1>
             <div class="bob-row">
                 <div class="bob-4item">
-                    <img src="pics/study.jpeg"  onclick="selectImg(this.src)">
+                    <img src=""  onclick="selectImg(this.src)">
                     <div style="height:43px;">pic1</div>
                 </div>
                 <div class="bob-4item">
-                    <img src="pics/cat.jpeg" onclick="selectImg(this.src)">
+                    <img src="" onclick="selectImg(this.src)">
                     <div style="height:43px;">pic2</div>
                 </div>
                 <div class="bob-4item">
-                    <img src="pics/stationary.jpeg" onclick="selectImg(this.src)">
+                    <img src="" onclick="selectImg(this.src)">
                     <div style="height:43px;">pic3</div>
                 </div>
                 <div class="bob-4item">
-                    <img src="pics/plant.jpeg" onclick="selectImg(this.src)">
+                    <img src="" onclick="selectImg(this.src)">
                     <div style="height:43px;">pic4</div>
                 </div>
             </div>
@@ -68,7 +116,6 @@
                     <div class="box box2">
                         <div class="content">
                             This is the photo description section. <br>
-                            And the photo on the left is the preview of "photos" section.
                         </div>
                     </div>
                 </div>
@@ -76,53 +123,6 @@
             <script src="main.js"></script>
         </div>
 
-        <!-- 2個並排 (album) -->
-        <div class="bob-container"> 
-            <h1> albums </h1>
-            <div class="block-container">
-                <div class="block"> 
-
-                    <div class="image">
-                        <img class="image__img" src="pics/view.jpeg">
-                        <div class="image__overlay image__overlay--blur">
-                            <div class="image__title"> Travel </div>
-                            <p class="image__description">
-                                Best memories with family.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- <img src="pics/main.jpeg"> -->
-                </div>
-
-                <div class="block small"> 
-                    <div class="image">
-                        <img class="image__img" src="pics/food.jpeg">
-                        <div class="image__overlay image__overlay--blur">
-                            <div class="image__title"> Food </div>
-                            <p class="image__description">
-                                Tasty food gooooood!
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="image">
-                        <img class="image__img" src="pics/others.jpeg">
-                        <div class="image__overlay image__overlay--blur">
-                            <div class="image__title"> Others </div>
-                            <p class="image__description">
-                                Photos cannot be categorised.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            
-
-
-        </div>
-
+       
     </body>
 </html>
