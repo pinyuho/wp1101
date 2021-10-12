@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title> My Photo Album </title>
+
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div id="showcase">
+            <div class="item"> 
+                My Photo Album 
+            </div>
+                <p class="ml13">
+                    <span class="letters">
+                        scroll down <br>
+                        &darr;
+                    </span>
+                </p>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+                <script src="anime.js"></script>
+        </div>
+
+        <div class="text">
+            <p>
+                This website is a collection of the photos I like. <br> 
+
+                Hope you enjoy it! <br> <br>
+            </p>
+            <center>
+                <hr width="45%" color="black" size="6px">
+            </center>     
+        </div>
+
+        
+        <div class="bob-container"> 
+            
+            <!-- 相片小圖 -->
+            <h1> photos </h1>
+            <div class="bob-row">
+                <div class="bob-4item">
+                    <img src="pics/study.jpeg"  onclick="selectImg(this.src)">
+                    <div style="height:43px;">pic1</div>
+                </div>
+                <div class="bob-4item">
+                    <img src="pics/cat.jpeg" onclick="selectImg(this.src)">
+                    <div style="height:43px;">pic2</div>
+                </div>
+                <div class="bob-4item">
+                    <img src="pics/stationary.jpeg" onclick="selectImg(this.src)">
+                    <div style="height:43px;">pic3</div>
+                </div>
+                <div class="bob-4item">
+                    <img src="pics/plant.jpeg" onclick="selectImg(this.src)">
+                    <div style="height:43px;">pic4</div>
+                </div>
+            </div>
+            
+
+            <!-- 相片預覽圖 -->
+            <div class="bob-row">
+                <div class="preview-img">
+                    <img src="" id="display" />
+                </div>
+                <div class="bob-2item">
+                    <div class="box box2">
+                        <div class="content">
+                            This is the photo description section. <br>
+                            And the photo on the left is the preview of "photos" section.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="main.js"></script>
+        </div>
+
+        <!-- 2個並排 (album) -->
+        <div class="bob-container"> 
+            <h1> albums </h1>
+            <div class="block-container">
+                <div class="block"> 
+
+                    <div class="image">
+                        <img class="image__img" src="pics/view.jpeg">
+                        <div class="image__overlay image__overlay--blur">
+                            <div class="image__title"> Travel </div>
+                            <p class="image__description">
+                                Best memories with family.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- <img src="pics/main.jpeg"> -->
+                </div>
+
+                <div class="block small"> 
+                    <div class="image">
+                        <img class="image__img" src="pics/food.jpeg">
+                        <div class="image__overlay image__overlay--blur">
+                            <div class="image__title"> Food </div>
+                            <p class="image__description">
+                                Tasty food gooooood!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="image">
+                        <img class="image__img" src="pics/others.jpeg">
+                        <div class="image__overlay image__overlay--blur">
+                            <div class="image__title"> Others </div>
+                            <p class="image__description">
+                                Photos cannot be categorised.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            
+
+
+        </div>
+
+    </body>
+</html>

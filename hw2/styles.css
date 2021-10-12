@@ -1,0 +1,338 @@
+@import url("https://fonts.googleapis.com/css2?family=Gayathri&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Gayathri", sans-serif;
+}
+
+body {
+    background: ivory;
+}
+
+h1 {
+    left: 100px;
+    padding-left: auto;
+}
+
+#showcase {
+    margin: auto;
+    background: aqua;
+    width: auto;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    /* flex-direction: row;*/
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    /* position: relative; */
+    /* justify-content: flex-start; */
+    /* align-items: flex-end; */
+    /* flex-wrap: wrap; */
+    background: url("pics/cover.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    flex-wrap: wrap;
+    /*filter: blur(3px);*/
+    animation: shake 3s infinite;
+}
+
+.item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin: 150px;
+    padding: 50px;
+    transition: all 2s ease;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: x-large;
+    line-height: 40px;
+}
+
+.text {
+    width: auto;
+    height: auto;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black;
+    margin: auto;
+    padding: 220px;
+    transition: all 2s ease;
+    /* font-family: monospace; */
+    font-size: x-large;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 40px;
+    letter-spacing: 2px;
+}
+
+.block-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.block-container img{
+  padding: 10px;
+  width: auto;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+}
+
+.block img {
+  padding: 10px;
+  width: auto;
+}
+
+.block img:hover{
+  opacity: 0.5;
+  transform: scale(1.05);
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.small img {
+  height: 250px;
+  width: auto;
+}
+
+.album img{
+  /* width: auto; */
+  height: 15px;
+  padding: 30px;
+  margin: auto;
+}
+
+/* 多個並排的圖片/文字 section */
+.bob-container{
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 100px;
+}
+
+.bob-row{
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.bob-row:before,.bob-row:after{
+  display: table;
+  content: " ";  
+}
+
+.bob-row:after{
+  clear: both;
+}
+
+/*2個並排 不管在任何尺寸都會2個並排*/
+.bob-2item{
+  width: 50%;
+}
+
+/*3個並排 在767px以下會垂直排列*/
+.bob-3item{
+  width: 100%;
+}
+/*4個並排 在767px以下會2個排列*/
+.bob-4item{
+  width:50%;
+}
+
+.bob-2item,.bob-3item,.bob-4item{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float:left;
+}
+
+.bob-2item img,.bob-3item img,.bob-4item img{
+  width: 100%;
+  height: 220px;
+  display: block;
+}
+
+.bob-2item img{
+  height: 500px;
+  float: left;
+}
+
+.bob-row .content{
+  display: inline-block;
+  height: auto;
+  line-height:1;
+	width: 400px;
+	vertical-align: middle;
+
+}
+
+.box{
+  width: auto;
+  margin: auto;
+	line-height: 500px;
+  text-align: center;
+}
+.box2 .content{
+  display: inline-block;
+  height: auto;
+  line-height:1;
+	width: auto;
+	vertical-align: middle;
+}
+
+.bob-4item:hover {
+    opacity: 0.5;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* 相片大圖 */
+.preview-img img{
+  position: relative;
+  min-height: 1px;
+  /* padding-right: 15px; */
+  padding-left: 15px;
+  width: 50%;
+  height: 500px;
+  float: left;
+  display: block;
+}
+
+.preview-img img:hover{
+  box-shadow: 10px 10px 5px rgba(71, 71, 71, 0.8);
+  transform: scale(1.03);
+  animation: swing 1s 1;
+}
+
+/* RWD */
+@media (max-width: 768px) {
+  .block-container{
+    flex-wrap: wrap;
+  }
+}
+@media (min-width: 768px) {
+  .bob-container {
+    width: 750px;
+  }
+  .bob-3item{
+    width: 33.33333333%;
+  }
+  .bob-4item{
+    width: 25%;
+  }
+}
+@media (min-width: 992px) {
+  .bob-container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .bob-container {
+    width: 1170px;
+  }
+}
+
+/* 文字動畫 */
+.ml13 {
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  font-weight: bold;
+}
+
+.ml13 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+@keyframes swing{
+  15%{transform: translateX(5px);}
+  40%{transform: translateX(-5px);}
+  65%{transform: translateX(2px);}
+  85%{transform: translateX(-2px);}
+  100%{transform: translateX(0px);}
+}
+
+
+/* album hover blur */
+.image {
+  position: relative;
+  width: auto;
+}
+
+.image__img {
+  display: block;
+  width: 100%;
+}
+
+.image__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-family: 'Quicksand', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+  padding: 10px;
+}
+
+.image__overlay--blur {
+  backdrop-filter: blur(5px);
+}
+
+.image__overlay > * {
+  transform: translateY(20px);
+  transition: transform 0.25s;
+}
+
+.image__overlay:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.image__overlay:hover > * {
+  transform: translateY(0);
+}
+
+.image__title {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.image__description {
+  font-size: 1.25em;
+  margin-top: 0.25em;
+}
+
+#display:hover{
+  margin:10px 12px 2px 3px;
+  box-shadow: 10px 10px 5px rgba(71, 71, 71, 0.8);
+  transform: scale(1.03);
+  animation: swing 1s 1;
+}
+
+
+
+
+
