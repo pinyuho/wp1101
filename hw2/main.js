@@ -44,6 +44,7 @@ function selectAlbum(albumInd) {
         selectedPic[i].firstElementChild.src = albums[albumInd][i];
     }
     displayImg.src = albums[albumInd][0];
+    // displayImg.style.opacity = "0.5";
     findSelected();
 }
 
