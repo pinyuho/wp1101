@@ -18,5 +18,3 @@
 - 沿襲 hw1 的 RWD 設計
     - Photo section: 畫面縮小則四格圖片會變為兩格
     - Album section: 畫面縮小則第二個欄位會跑到下一行 
-
-- 預覽圖很多時，會⾃動產出 scroll bar
