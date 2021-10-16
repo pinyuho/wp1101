@@ -23,7 +23,14 @@ const albums = [
 let currentAlbumInd = 0;
 let displayImg = document.getElementById("display"),
     selectedPic = document.getElementsByClassName("bob-4item");
+    albumPics = document.getElementsByClassName("image");
+    scrollPic = document.getElementsByClassName("bob-row");
 
+
+
+for (let i = 1; i < albumPics.length; i++) {
+    albumPics[i].style.opacity = "0.3";
+}
 
 // default value
 displayImg.src = albums[0][0];
@@ -44,8 +51,15 @@ function selectAlbum(albumInd) {
         selectedPic[i].firstElementChild.src = albums[albumInd][i];
     }
     displayImg.src = albums[albumInd][0];
-    // displayImg.style.opacity = "0.5";
-    findSelected();
+    findSelected(); // reset selected photo
+
+    for (let i = 0; i < albumPics.length; i++) {
+        albumPics[i].style.opacity = "0.3";
+    }
+    albumPics[albumInd].style.opacity = "1"; // chosen album
+
+    // // show selected album's photos
+    // for (let i = 0; i < selectedPic.)
 }
 
 
@@ -76,3 +90,7 @@ function findSelected() {
         }
     }
 }
+
+
+// diff num of photos
+var appendedNode = scrollPic[0].appendChild()
