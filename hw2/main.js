@@ -20,11 +20,9 @@ const albums = [
     ]
 ]
 
-let currentAlbumInd = 0;
 let displayImg = document.getElementById("display"),
     selectedPic = document.getElementsByClassName("bob-4item");
     albumPics = document.getElementsByClassName("image");
-    scrollPic = document.getElementsByClassName("bob-row");
 
 
 
@@ -74,7 +72,7 @@ function selectImg(srcName) {
 }
 
 function isSelected(srcName) {
-    console.log(srcName === displayImg.src)
+    // console.log(srcName === displayImg.src)
     return (srcName === displayImg.src);
 }
 
@@ -90,7 +88,3 @@ function findSelected() {
         }
     }
 }
-
-
-// diff num of photos
-var appendedNode = scrollPic[0].appendChild()
