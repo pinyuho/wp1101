@@ -78,6 +78,7 @@ function renderTodo(todo) {
             <button> Clear Completed </button>
         </div>
     `
+    main.removeChild(main.lastChild);
     main.append(footer);
 }
 
