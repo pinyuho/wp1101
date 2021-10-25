@@ -140,13 +140,8 @@ ul {
 
 .todo-app__item-detail label {
     text-decoration: line-through;
-}
-
-.text_done_style {
-    text-decoration: line-through;
     opacity: 0.5;
 }
-
 
 .todo-app__footer {
     width: 100%;

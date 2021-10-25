@@ -1,94 +1,109 @@
 let todoItems = [];
+const list = document.querySelector('.todo-app__list');
+const main = document.querySelector('.todo-app__main');
 
-class ToDo {
-    constructor (text) {
-        this.index = todoItems.length + 1;
-        this.checked = false;
+function addTodo(text) {
+    const todo = {
+      text,
+      checked: false,
+      id: Date.now(),
+    };
+  
+    todoItems.push(todo);
+    renderTodo(todo);
+    // console.log(todoItems);
+  }
 
-        this.node = document.createElement("li");
-        this.node.classList.add("todo-app__item");  
-        this.node.innerHTML= `
-            <div class="todo-app__checkbox">
-                <input type="checkbox" id=${this.index}>
-                <label for=${this.index}></label>
-            </div>
-            <h1 class="todo-app__item-detail">
-                ${text}
-            </h1>
-            <img src="./img/x.png" class="todo-app__item-x">`      
-    }
-    changeStatus () {
-        if (this.checked === false) {
-            this.node.innerHTML= `
-            <div class="todo-app__checkbox">
-                <input type="checkbox" id=${this.index}>
-                <label for=${this.index}></label>
-            </div>
-            <h1 class="todo-app__item-detail">
-                <label>${text}</label>
-            </h1>
-            <img src="./img/x.png" class="todo-app__item-x">`  
-            this.checked = true;
-        }
-        if (this.checked === true) {
-            this.node.innerHTML= `
-            <div class="todo-app__checkbox">
-                <input type="checkbox" id=${this.index}>
-                <label for=${this.index}></label>
-            </div>
-            <h1 class="todo-app__item-detail">
-                ${text}
-            </h1>
-            <img src="./img/x.png" class="todo-app__item-x">`  
-            this.checked = false;
-        }
-    }
-
-    get Node () {
-        return this.node;
-    }
-}
-
-let listNode = document.getElementById("todo-list");
+// Select the form element
 let inputNode = document.getElementsByClassName("todo-app__input")[0];
 
 inputNode.addEventListener(
     'keypress', 
     function (event) {
     if (event.keyCode === 13) {
-      const inputValue = inputNode.value;
-      let newNode = new ToDo(inputValue).Node;
-
-      todoItems.push(newNode);
-      listNode.appendChild(newNode);
-
-      // clear input column
-      inputNode.value = '';
+        const inputValue = inputNode.value;
+        addTodo(inputValue);
+        // clear input column
+        inputNode.value = '';
     }
   });
 
-// change done status
-document.querySelector('.todo-app__list').addEventListener(
-    'click', 
-    function (event) {
-    const target = event.target;
+function renderTodo(todo) {
+    const isChecked = todo.checked ? 'done': '';
+    const item = document.querySelector(`[id='${todo.id}']`);
 
-    if (target.parentNode.classList.contains("todo-app__checkbox")) {
-        console.log(target.parentNode.classList);
-        var element = document.getElementsByClassName("todo-app__item-detail")[0];
-        console.log(element.classList);
-        element.classList.add("text_done_style");
-        // element.classList.remove("text_done_style");
+    const node = document.createElement("li");
+    node.classList.add("todo-app__item");
+    if (!isChecked) {
+        node.innerHTML= `
+        <div class="todo-app__checkbox">
+            <input type="checkbox" id=${todo.id}>
+            <label for=${todo.id}></label>
+        </div>
+        <h1 class="todo-app__item-detail">
+            ${todo.text}
+        </h1>
+        <img src="./img/x.png" class="todo-app__item-x">`   
+    } else {
+        node.innerHTML= `
+        <div class="todo-app__checkbox">
+            <input type="checkbox" id=${todo.id}>
+            <label for=${todo.id}></label>
+        </div>
+        <h1 class="todo-app__item-detail">
+            <label>${todo.text}</label>
+        </h1>
+        <img src="./img/x.png" class="todo-app__item-x">` 
+    }
+    
+    if (item) {
+    // replace it
+    list.replaceChild(node, item);
+    } else {
+    list.append(node);
+    }
+
+    let footer = document.createElement("footer");
+    footer.classList.add("todo-app__footer"); 
+    footer.id = "todo-footer";
+    footer.innerHTML = `
+        <div class="todo-app__total"> ${todoItems.length} left </div>
+        <ul class="todo-app__view-buttons">
+            <button> All </button>
+            <button> Active </button>
+            <button> Completed </button>
+        </ul>
+
+        <div class="todo-app__clean"> 
+            <button> Clear Completed </button>
+        </div>
+    `
+    main.append(footer);
+}
+
+list.addEventListener('click', event => {
+    if (event.target.parentNode.classList.contains('todo-app__checkbox')) {
+        console.log(event.target.id);
+        // const itemKey = event.target.id;
+        // console.log("itemkey");
+        // console.log(event.target.id);
+        // toggleDone(Number(event.parentNode.target.id));
+
     }
   });
 
-
-// functions
-function renderTodo (todoItems) {
+function toggleDone(itemKey) {
+    // console.log(itemKey);
+    let index = -1;
     for (let i = 0; i < todoItems.length; i++) {
-        listNode.appendChild(todoItems[i].Node);
+        if (todoItems[i].id == itemKey) {
+            index = i;
+        }
     }
-  }
+    // console.log(index);
+    todoItems[index].checked = !todoItems[index].checked;
+    // renderTodo(todoItems[index]);
+}
 
-//function addTodo ()
+
   
