@@ -156,14 +156,20 @@ input[type='checkbox'] {
 
 .todo-app__view-buttons {
   display: flex;
-  margin: 0;
+  /* margin: 0; */
   margin-left: 2em;
   padding: 0;
-  width: 12em;
+  /* width: 12em; */
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   list-style: none;
+
+  position: fixed;
+  width: 50px;
+  margin: 5% auto;
+  left: 0;
+  right: 0;
 }
 
 .todo-app__view-buttons button {
@@ -191,6 +197,7 @@ input[type='checkbox'] {
   font-size: 0.8em;
   font-weight: inherit;
   cursor: pointer;
+  background-color: white;
 }
 
 .todo-app__clean button:focus {
