@@ -35,7 +35,6 @@ export default (boardSize, mineNum) => {
                 y: y,                       // To store the y coordinate (the row index) of the cell.
                 flagged: false,             // To store if the cell is flagged.
             });
-            console.log("heheheeh");
         }
         board.push(subCol);
     }
@@ -58,20 +57,22 @@ export default (boardSize, mineNum) => {
     {/* Reminder: Some cells in the board do not have "Top" position, some do not have "Top-Right" position .... */}
     {/* Warning: The value of any cell will not be bigger than 8 logically. */}
     {/* Testing: printBoard() */}
-    board = board.map(x => x.map(
-        item => (
-            {
-            value: 3,                   // To store the number of mines around the cell.
-            revealed: item.revealed,            // To store if the cell is revealed.
-            x: x,                       // To store the x coordinate (the column index) of the cell.
-            y: item,                       // To store the y coordinate (the row index) of the cell.
-            flagged: item.flagged,             // To store if the cell is flagged.
+    for(let x = 0; x < boardSize; x++){
+        for(let y = 0; y < boardSize; y++){
+            let cnt = 0;
+            for(let i = x - 1; i < x + 2; i++){
+                for(let j = y - 1; j < y + 2; j++){
+                    if(i >= 0 && i < boardSize && j >= 0 && j < boardSize && board[i][j].value === '💣'){
+                        cnt ++;
+                    }
+                }
             }
-        )
-    ));
-    printBoard();
-    console.log("here");
-    console.log(board);
+            board[x][y].value = cnt;    
+        }
+    }
+
+    //printBoard();
+
 
     return { board, mineLocations };
 };

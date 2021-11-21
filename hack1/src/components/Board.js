@@ -13,6 +13,7 @@ import Dashboard from './Dashboard';
 import createBoard from '../util/createBoard';
 import { revealed } from '../util/reveal';
 import './css/Board.css'
+import { isObjectLike } from 'lodash';
 
 
 const Board = ({ boardSize, mineNum, backToHome }) => {
@@ -32,9 +33,38 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
     const freshBoard = () => {
         {/* -- TODO 3-1 -- */}
         {/* Useful Hint: createBoard(...) */}
-        let newBoard, newMineLocations = createBoard(boardSize, mineNum);
+        let newBoard = [];
+        let createdBoard = createBoard(boardSize, mineNum);
+        for(let x = 0; x < boardSize; x++){
+            let subCol = [];
+            for(let y = 0; y < boardSize; y++){
+                subCol.push({
+                    value: createdBoard.board[x][y].value,                  
+                    revealed: createdBoard.board[x][y].revealed,           
+                    x: x,                       
+                    y: y,                       
+                    flagged: createdBoard.board[x][y].flagged,          
+                });
+            }
+            newBoard.push(subCol);
+        }
         setBoard(newBoard);
+
+        let newMineLocations = [];
+        for(let i  = 0; i < createdBoard.mineLocations.length; i++){
+            newMineLocations.push(createdBoard.mineLocations[i]);
+        }
         setMineLocations(newMineLocations);
+
+        // print
+        console.log("Current Board")
+        console.log(boardSize)
+        for(let x = 0; x < boardSize; x++){
+            for(let y = 0; y < boardSize; y++){
+                console.log(newBoard[x][y].value);
+            }
+        }
+        console.log(newBoard[0][0])
     }
 
     const restartGame = () => {
@@ -70,27 +100,18 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
             {/* Useful Hint: The board is composed of BOARDSIZE*BOARDSIZE of Cell (2-dimention). So, nested 'map' is needed to implement the board.  */}
             {/* Reminder: Remember to use the component <Cell> and <Dashboard>. See Cell.js and Dashboard.js for detailed information. */}
                 <div className='boardContainer'>
-                    <Dashboard />
-                    {/* <div id="row0" style={{display: 'flex'}}>
-                    {
-                        board[0].map(item =>
-                            {
-                                Cell({
-                                    rowIdx: 0, 
-                                    colIdx: item.y, 
-                                    detail:{value: item.value, 
-                                            revealed: item.revealed, 
-                                            x: item.x, 
-                                            y: item.y, 
-                                            flagged: item.flagged},
-                                    updateFlag: {updateFlag},
-                                    revealCell: {revealCell}
-                                })
-                            }
-                        )
-
-                    }
-                    </div> */}
+                    <Dashboard /> 
+                    <div id='row0' style = {{display: 'flex'}} > 
+                    <>
+                    {/* {Cell({
+                        rowIdx: 0,
+                        colIdx: 0,
+                        detail: board[0][0],
+                        updateFlag: {updateFlag}, 
+                        revealCell: {revealCell}
+                    })} */}
+                    </>
+                    </div>
                 </div>
             </div>
         </div>
