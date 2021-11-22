@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import './App.css';
-import { guess, startGame, restart } from './axios'
+import { guess, startGame, restart, set } from './axios'
 
 function App() {
 
   // Define state
   const [hasStarted, setHasStarted] = useState(false);
   const [hasWon, setHasWon] = useState(false);
-  const [number, setNumber] = useState('');
+  const [hasResult, setResult] = useState(false);
+  const [hasSetCode, setHasSetCode] = useState(false);
+  const [code, setCode] = useState('');
+  const [settedCode, setSettedCode] = useState('');
   const [status, setStatus] = useState('');
-
 
   const handleStart = async (e) => {
     let obj = await startGame()
@@ -21,25 +23,38 @@ function App() {
     let obj = await restart()
     console.log(obj)
     setHasWon(false)
-    setNumber('')
+    setResult(false)
+    setHasSetCode(false)
+    setCode('')
     setStatus('')
   }
 
+  const handleSet = async () => {
+    const obj = await set(code); // FIXME
+    console.log(obj)
+    setCode('')
+    setHasSetCode(true)
+    setStatus(obj.msg)
+  }
+
   function handleChange(e) {
-    setNumber(e.target.value)
+    setCode(e.target.value)
   }
 
   const handleGuess = async () => {
-    const obj = await guess(number);
-    console.log("response: ")
+    const obj = await guess(code);
+    // console.log("response: ")
     console.log(obj)
 
-    if (obj.msg === 'Equal') {
+    if (obj.msg.startsWith('4A0B')) {
+      setResult(true)
       setHasWon(true)
-    }
-    else {
-      setStatus(obj.msg);
-      setNumber('')
+    } else if (obj.computerWon) {
+      setResult(true)
+      setSettedCode(obj.settedCode)
+    } else {
+      setStatus(obj.msg)
+      setCode('')
     }
   }
 
@@ -55,36 +70,62 @@ function App() {
     </div>
   )
 
-  const gameMode = (
+  const setMode = (
     <>
-      <p>Guess a number between 1 to 100</p>
-      <input value={number} onChange={handleChange} // Get the value from input
-      ></input>
-      <button  // Send number to backend
-        onClick={handleGuess}
-        disabled={!number}>guess!</button> 
+      <p> Input a 4 digit number for computer to guess (ex. 0001) </p>
+      <input value={code} onChange={handleChange}></input>
+      <button onClick={handleSet} disabled={!code}>set code</button> 
       <p>{status}</p>
     </>
   )
 
-  const winningMode = (
+  const guessMode = (
     <>
-      <p>You won! The number was {number}.</p>
+      <p>Guess a 4 digit number (ex. 0001)</p>
+      <input value={code} onChange={handleChange}></input>
+      <button  onClick={handleGuess} disabled={!code}>guess!</button> 
+      <p>{status}</p>
+    </>
+  )
+
+  const loseMode = (
+    <>
+      <p>You lose! The computer guessed your code = {settedCode}</p>
+      <button onClick={handleRestart}> restart </button>
+    </>
+  )
+
+  const winMode = (
+    <>
+      <p>You won! The code was {code}.</p>
       <button onClick={handleRestart}> restart </button>
     </>
   )
   // End defining views
 
   // main html
+
+  const gameMode = (
+    <div>
+      { hasSetCode ? guessMode : setMode }
+    </div>
+  )
+
+  const resultMode = (
+    <div>
+      { hasWon ? winMode : loseMode }
+    </div>
+  )
+
   const game = (
     <div>
-      {hasWon ? winningMode : gameMode }
+      { hasResult ? resultMode : gameMode }
     </div>
   )
 
   return (
     <div className="App">
-      {hasStarted ? game : startMenu}
+      { hasStarted ? game : startMenu }
     </div>
   );
 }

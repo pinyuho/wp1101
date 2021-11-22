@@ -8,6 +8,7 @@ const app = express()
 app.use(cors())
 
 // define routes
+app.use(express.json()) //********
 app.use('/api/guess', guessRoute)
 
 // define server

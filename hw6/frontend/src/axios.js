@@ -6,9 +6,17 @@ const startGame = async () => {
   return obj
 }
 
-const guess = async (number) => {
+const set = async (code) => {
     try {
-        const { data: obj } = await instance.get('/guess', { params: { number } })
+        const { data: obj } = await instance.post('/set', { code } ) // JSON.stringify()
+        return obj
+    }
+    catch (error) { return error.response.data }
+}
+
+const guess = async (code) => {
+    try {
+        const { data: obj } = await instance.get('/guess', { params: { code } })
         return obj 
     }
     catch (error) { return error.response.data }
@@ -19,7 +27,7 @@ const restart = async () => {
     return obj
 }
 
-export { startGame, guess, restart }
+export { startGame, guess, restart, set }
    
 
 

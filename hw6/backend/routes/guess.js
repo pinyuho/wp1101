@@ -1,37 +1,56 @@
 import express from 'express'
-import { getNumber, genNumber } from '../core/getNumber'
+import { genCode, getCode, setCode, getSettedCode, genRandomCode, genAB } from '../core/getCode'
 
 const router = express.Router()
 
-function roughScale(x, base) {
-    const parsed = parseInt(x, base);
-    if (isNaN(parsed)) { return 0; }
-    return parsed;
-}
-
 router.post('/start', (_, res) => {
-    genNumber(1, 100) // 用亂數產生一個猜數字的 number 
-    res.json({ msg: 'The game has started.', number: getNumber() })
+    genCode()
+    res.json({ msg: 'The game has started.', code: getCode() })
+})
+
+router.post('/set', (req, res) => {
+    const code = req.body.code
+    console.log(code)
+    // check if NOT a 4 digit num
+    if (code.length != 4) {
+        res.status(406).send({ msg: `Error: "${req.body.code}" is not a valid input (4 digit number)` })
+    }
+
+    setCode(code)
+
+    res.json({ msg: 'The code has set.', code: getSettedCode() })
 })
 
 router.post('/restart', (_, res) => {
-    genNumber(1, 100) // 用亂數產生一個猜數字的 number 
-    res.json({ msg: 'The game has restarted.', number: getNumber() })
+    genCode()
+    res.json({ msg: 'The game has restarted.', number: getCode() })
 })
 
 router.get('/guess', (req, res) => {
-    const number = getNumber()
-    const guessed = roughScale(req.query.number, 10)
-    // check if NOT a num or not in range [1,100]
-    if (!guessed || guessed < 1 || guessed > 100) {
-        res.status(406).send({ msg: `Error: "${req.query.number}" is not a valid number (1 - 100)` })
-    } else if (number === guessed) { 
-        res.json({ msg: 'Equal' })
-    } else if (number > guessed) {
-        res.json({ msg: 'Bigger' })
-    } else if (number < guessed) {
-        res.json({ msg: 'Smaller' })
+    const code = getCode()
+    const guessed = req.query.code
+
+    // check if NOT a 4 digit num
+    if (guessed.length != 4) {
+        res.status(406).send({ msg: `Error: "${req.query.code}" is not a valid input (4 digit number)` })
     }
+    
+    const guess = genAB(code, guessed)
+    let guessCom = new Object()
+    const computerGuess = genRandomCode()
+    console.log(computerGuess)
+    let computerWon = false
+    if (getSettedCode() === computerGuess) {
+        computerWon = true
+    } else {
+        guessCom = genAB(getSettedCode(), computerGuess)
+    }
+
+    res.json({ 
+        msg: `${guess.cntA}A${guess.cntB}B, \nThe computer guessed ${computerGuess}, ${guessCom.cntA}A${guessCom.cntB}B`,
+        settedCode: getSettedCode(), 
+        computerWon: computerWon
+    })
 })
 
 export default router
