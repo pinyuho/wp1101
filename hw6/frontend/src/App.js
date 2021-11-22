@@ -12,29 +12,49 @@ function App() {
   const [code, setCode] = useState('');
   const [settedCode, setSettedCode] = useState('');
   const [status, setStatus] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleStart = async (e) => {
     let obj = await startGame()
     console.log(obj)
-    setHasStarted(true)
+
+    if(obj.msg.startsWith('Error')){
+      setErrorMsg(obj.msg)
+    } else {
+      setErrorMsg('')
+      setHasStarted(true)
+    }
   }
 
   const handleRestart = async (e) => {
     let obj = await restart()
     console.log(obj)
-    setHasWon(false)
-    setResult(false)
-    setHasSetCode(false)
-    setCode('')
-    setStatus('')
+    if(obj.msg.startsWith('Error')){
+      setErrorMsg(obj.msg)
+    } else {
+      setErrorMsg('')
+
+      setHasWon(false)
+      setResult(false)
+      setHasSetCode(false)
+      setCode('')
+      setStatus('')
+    }
   }
 
   const handleSet = async () => {
     const obj = await set(code); // FIXME
     console.log(obj)
-    setCode('')
-    setHasSetCode(true)
-    setStatus(obj.msg)
+
+    if(obj.msg.startsWith('Error')){
+      setErrorMsg(obj.msg)
+    } else {
+      setErrorMsg('')
+
+      setCode('')
+      setHasSetCode(true)
+      setStatus(obj.msg)
+    }
   }
 
   function handleChange(e) {
@@ -46,15 +66,21 @@ function App() {
     // console.log("response: ")
     console.log(obj)
 
-    if (obj.msg.startsWith('4A0B')) {
-      setResult(true)
-      setHasWon(true)
-    } else if (obj.computerWon) {
-      setResult(true)
-      setSettedCode(obj.settedCode)
+    if(obj.msg.startsWith('Error')){
+      setErrorMsg(obj.msg)
     } else {
-      setStatus(obj.msg)
-      setCode('')
+      setErrorMsg('')
+      
+      if (obj.msg.startsWith('4A0B')) {
+        setResult(true)
+        setHasWon(true)
+      } else if (obj.computerWon) {
+        setResult(true)
+        setSettedCode(obj.settedCode)
+      } else {
+        setStatus(obj.msg)
+        setCode('')
+      }
     }
   }
 
@@ -67,6 +93,7 @@ function App() {
   const startMenu = (
     <div>
       <button onClick={handleStart}> start game </button>
+      <p>{errorMsg}</p>
     </div>
   )
 
@@ -76,6 +103,7 @@ function App() {
       <input value={code} onChange={handleChange}></input>
       <button onClick={handleSet} disabled={!code}>set code</button> 
       <p>{status}</p>
+      <p>{errorMsg}</p>
     </>
   )
 
@@ -85,6 +113,7 @@ function App() {
       <input value={code} onChange={handleChange}></input>
       <button  onClick={handleGuess} disabled={!code}>guess!</button> 
       <p>{status}</p>
+      <p>{errorMsg}</p>
     </>
   )
 
@@ -92,6 +121,7 @@ function App() {
     <>
       <p>You lose! The computer guessed your code = {settedCode}</p>
       <button onClick={handleRestart}> restart </button>
+      <p>{errorMsg}</p>
     </>
   )
 
@@ -99,6 +129,7 @@ function App() {
     <>
       <p>You won! The code was {code}.</p>
       <button onClick={handleRestart}> restart </button>
+      <p>{errorMsg}</p>
     </>
   )
   // End defining views

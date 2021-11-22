@@ -10,7 +10,7 @@ router.post('/start', (_, res) => {
 
 router.post('/set', (req, res) => {
     const code = req.body.code
-    console.log(code)
+    // console.log(code)
     // check if NOT a 4 digit num
     if (code.length != 4) {
         res.status(406).send({ msg: `Error: "${req.body.code}" is not a valid input (4 digit number)` })
@@ -38,7 +38,7 @@ router.get('/guess', (req, res) => {
     const guess = genAB(code, guessed)
     let guessCom = new Object()
     const computerGuess = genRandomCode()
-    console.log(computerGuess)
+    // console.log(computerGuess)
     let computerWon = false
     if (getSettedCode() === computerGuess) {
         computerWon = true
