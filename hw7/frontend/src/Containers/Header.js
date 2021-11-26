@@ -20,8 +20,8 @@ const Header = () => {
 
   const handleClear = async () => {
     const {
-      data: { message },
-    } = await axios.delete('/api/clear-db');
+      data: { message }
+    } = await axios.delete('/clear-db');
     addRegularMessage(message);
   };
 
