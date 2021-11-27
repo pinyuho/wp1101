@@ -29,7 +29,7 @@ export default function BasicTable(cards) {
         cards = cards.sort((a, b) => (a[column] > b[column]) ? 1 : -1)
     }
     
-    console.log('sorted cards', cards)
+    // console.log('sorted cards', cards)
 
     return (
     <>
