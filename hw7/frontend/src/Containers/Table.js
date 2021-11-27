@@ -22,14 +22,11 @@ export default function BasicTable(cards) {
         func(event.target.value);
     };
 
-    let sortStr = (sort === 'desc') ? ('? -1 : 1') : ('? 1 : -1') 
     if (sort === 'desc') {  // DESC
         cards = cards.sort((a, b) => (a[column] > b[column]) ? -1 : 1)
     } else {  // ASC
         cards = cards.sort((a, b) => (a[column] > b[column]) ? 1 : -1)
     }
-    
-    // console.log('sorted cards', cards)
 
     return (
     <>
