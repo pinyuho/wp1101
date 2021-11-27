@@ -12,25 +12,33 @@ router.post('/', async (req, res) => {
     };
     const update = { score: newScoreCard.score };
 
+    let response = {
+        cards: [],
+        message: ''
+    }
 
     const oldScoreCard = await scoreCard.findOne(filter)
     if (oldScoreCard) {
-        await scoreCard.findOneAndUpdate(filter, update, {
-            new: true
-        }).then(res.json({
-            message: `Updating (${newScoreCard.name}, ${newScoreCard.subject}, ${newScoreCard.score})`,
-            card: newScoreCard
-            })
-        ).catch(err => res.status(400).json("Error! " + err))
+        await scoreCard.findOneAndUpdate(filter, update, {new: true})
+        .then(response.message = `Updating (${newScoreCard.name}, ${newScoreCard.subject}, ${newScoreCard.score})`)
+        .catch(err => res.status(400).json("Error! " + err))
     }
     else {
         await newScoreCard.save()
-        .then(res.json({
-            message: `Adding (${newScoreCard.name}, ${newScoreCard.subject}, ${newScoreCard.score})`,
-            card: newScoreCard
-            })
-        ).catch(err => res.status(400).json("Error! " + err))
+        .then(response.message = `Adding (${newScoreCard.name}, ${newScoreCard.subject}, ${newScoreCard.score})`)
+        .catch(err => res.status(400).json("Error! " + err))
     }
+
+    console.log('name:', newScoreCard.name)
+
+    await scoreCard.find({
+        name: newScoreCard.name
+    }).then(function(scoreCards) {
+        response.cards = scoreCards
+    })
+
+    console.log(response.cards)
+    res.json(response)
 
 })
 
@@ -40,14 +48,15 @@ router.get('/', async (req, res) => {
     }
 
     let response = {
-        messages: [],
+        cards: [],
         message: ''
     }
 
     await scoreCard.find(filter)
     .then(function(scoreCards) {
         if (scoreCards.length !== 0) {
-            response.messages = scoreCards.map(scoreCard => `(${scoreCard.name}, ${scoreCard.subject}, ${scoreCard.score})`)
+            response.cards = scoreCards
+            // response.cards = scoreCards.map(scoreCard => `(${scoreCard.name}, ${scoreCard.subject}, ${scoreCard.score})`)
         } else {
             response.message = `${req.query.type} (${req.query.queryString}) not found!`
         }

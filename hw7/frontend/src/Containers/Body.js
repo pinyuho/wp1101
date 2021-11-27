@@ -49,6 +49,8 @@ const Body = () => {
 
   const { messages, addCardMessage, addRegularMessage, addErrorMessage } = useScoreCard();
 
+  const [tableCards, setTableCards] = useState([]);
+
   const [name, setName] = useState('');
   const [subject, setSubject] = useState('');
   const [score, setScore] = useState(0);
@@ -56,32 +58,37 @@ const Body = () => {
   const [queryType, setQueryType] = useState('name');
   const [queryString, setQueryString] = useState('');
 
+  // for Tab setting
   const [value, setValue] = useState('1');
   const handleChangeValue = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleChange = (func) => (event) => {
-    console.log('here')
     func(event.target.value);
   };
 
   const handleAdd = async () => {
+    console.log(tableCards)
+    setTableCards([])
     const {
-      data: { message, card },
+      data: { message, cards },
     } = await axios.post('/', {
       name,
       subject,
       score,
     });
 
-    if (!card) addErrorMessage(message);
-    else addCardMessage(message);
+    if (!cards) addErrorMessage(message);
+    else {
+      setTableCards(cards)
+      addCardMessage(message)
+    };
   };
 
   const handleQuery = async () => {
     const {
-      data: { messages, message },
+      data: { cards, message },
     } = await axios.get('/', {
       params: {
         type: queryType,
@@ -89,8 +96,10 @@ const Body = () => {
       },
     });
 
-    if (messages.length === 0) addErrorMessage(message);
-    else addRegularMessage(...messages);
+    if (cards.length === 0) {
+      setTableCards([])
+      addErrorMessage(message)
+    } else {setTableCards(cards)};  //addRegularMessage(...cards);
   };
 
   return (
@@ -183,8 +192,8 @@ const Body = () => {
           {m.message}
         </Typography>
       ))}
-      {/* {Table(m.)} */}
     </ContentPaper>
+    {Table(tableCards)}
     </Wrapper>
   );
 };
