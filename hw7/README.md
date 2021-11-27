@@ -9,7 +9,7 @@ yarn add @mui/lab @mui/material
 - if unable to run frontend:
 ```
 cd frontend
-yarn update
+yarn upgrade
 ```
 
 ### Features
