@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
             message: `Updating (${newScoreCard.name}, ${newScoreCard.subject}, ${newScoreCard.score})`,
             card: newScoreCard
             })
-        )
+        ).catch(err => res.status(400).json("Error! " + err))
     }
     else {
         await newScoreCard.save()
@@ -29,55 +29,37 @@ router.post('/', async (req, res) => {
             message: `Adding (${newScoreCard.name}, ${newScoreCard.subject}, ${newScoreCard.score})`,
             card: newScoreCard
             })
-        )
-        .catch(err => res.status(400).json("Error! " + err))
+        ).catch(err => res.status(400).json("Error! " + err))
     }
 
 })
 
 router.get('/', async (req, res) => {
-    // let name = req.query.name;
-    // let subject = req.query.subject;
+    const filter = {
+        [req.query.type]: req.query.queryString
+    }
 
     let response = {
-        messages: 'messages here',
-        message: 'error message'
+        messages: [],
+        message: ''
     }
 
-    if (req.query.type === 'name') {
-        await scoreCard.find({
-            name: req.query.queryString
-        }).then(function(scoreCards) {
-            if (scoreCards.length !== 0) {
-                res.json( scoreCards );
-            } else {
-                res.json(`${req.query.type} (${req.query.queryString}) not found!`);
-            }
-        }).catch(err => res.status(400).json('Error! ' + err))
-    }
-    else if (req.query.type === 'subject') {
-        await scoreCard.find({
-            subject: req.query.queryString
-        }).then(function(scoreCards) {
-            if (scoreCards.length !== 0) {
-                res.json( scoreCards );
-            } else {
-                res.json(`${req.query.type} (${req.query.queryString}) not found!`);
-            }
-        }).catch(err => res.status(400).json('Error! ' + err))
-    }
-    else {
-        await scoreCard.find()  // using .find() without a paramter will match on all scorecard instances
-          .then(allScoreCards => res.json(allScoreCards))
-          .catch(err => res.status(400).json('Error! ' + err))
-    }
+    await scoreCard.find(filter)
+    .then(function(scoreCards) {
+        if (scoreCards.length !== 0) {
+            response.messages = scoreCards.map(scoreCard => `(${scoreCard.name}, ${scoreCard.subject}, ${scoreCard.score})`)
+        } else {
+            response.message = `${req.query.type} (${req.query.queryString}) not found!`
+        }
+    }).catch(err => res.status(400).json('Error! ' + err))
     
-    //res.json(response)
+    
+    res.json(response)
     
 })
 
 router.delete('/clear-db', async(_, res) => {
-    await scoreCard.remove({})
+    await scoreCard.deleteMany({})
         .then(res.json({ message: 'Database cleared' }))
         .catch(err => res.status(400).json('Error! ' + err))
 })
