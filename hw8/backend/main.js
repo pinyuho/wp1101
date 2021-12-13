@@ -1,24 +1,25 @@
 import express from 'express';
 import cors from 'cors'
 import dotenv from 'dotenv-defaults';
+import routes from './routes/api'
 import WebSocket from "ws";
 import { createServer } from 'http';
-import { db } from './server/mongo'
-import { sendData, sendStatus } from './server/wssConnect'
-import { Message } from './model/message'
+import { db } from './servers/mongo'
+import { broadcastMessage, broadcastStatus } from './routes/socket'
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
-// app.use(cors())
-// app.use(express.json()) 
-// app.use('/api/message', Message)
 
 const server = createServer(app);
 const wss = new WebSocket.Server({ server });
 
-// wss: server side, ws: client side
+app.use(cors())
+app.use(express.json()) 
+app.use('/api/message', routes)
+
+const Message = require('./models/message')
 db.once('open', () => {
     console.log("DB connected.");
     wss.on('connection', (ws) => {
@@ -28,6 +29,8 @@ db.once('open', () => {
             switch (task) {
                 case "input": {
                     const { name, body } = payload;
+
+                    // save to DB
                     const message = new Message({ name, body });
                     try {
                         await message.save();
@@ -35,11 +38,15 @@ db.once('open', () => {
                     catch (e) {
                         throw new Error("Message DB save error: " + e);
                     }
-                    sendData(["output", [payload]], ws);  // send to client
-                    sendStatus({
+                    broadcastMessage(["output", [payload]], {
                         type: "success",
                         msg: "Message sent."
-                    }, ws);
+                    }, wss)
+                    break;
+                }
+                case "clearReq": {
+                    const status = payload;
+                    broadcastStatus(status, wss)
                     break;
                 }
                 default:
@@ -52,7 +59,3 @@ db.once('open', () => {
         console.log(`Server socket listening on http://localhost:${port}!`),
     );
 })
-
-// app.listen(port, () =>
-//     console.log(`App listening on port ${port}!`),
-// );

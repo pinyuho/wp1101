@@ -8,6 +8,7 @@
     "server": "cd backend && yarn server"
   },
   "dependencies": {
-    "http": "^0.0.1-security"
+    "http": "^0.0.1-security",
+    "styled-components": "^5.3.3"
   }
 }
