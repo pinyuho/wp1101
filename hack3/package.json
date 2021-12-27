@@ -1,0 +1,23 @@
+{
+  "name": "hack3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "frontend": "cd ./frontend && npm start",
+    "backend": "cd ./backend && npm start",
+    "test": "npx cypress run --browser=firefox --spec cypress/integration/*.spec.js"
+  },
+  "devDependencies": {
+    "cypress": "^9.2.0",
+    "dotenv-defaults": "^3.0.0",
+    "mongoose": "^6.1.4"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "antd": "^4.18.0",
+    "apollo-boost": "^0.4.9",
+    "apollo-link-error": "^1.1.13",
+    "styled-components": "^5.3.3"
+  }
+}
