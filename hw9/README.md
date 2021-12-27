@@ -13,5 +13,12 @@ yarn upgrade
 ```
 
 ### Bugs to be fixed
-- index.js:1 Missing field 'name' while writing result "messages"
 - Creating new chatbox will query chatBox before created (async problem but still don't know how to fix)
+- Message sent: 
+```
+index.js:1 Missing field 'name' while writing result "messages"
+```
+- Loading message: 
+```
+Warning: Render methods should be a pure function of props and state; triggering nested component updates from render is not allowed. If necessary, trigger nested updates in componentDidUpdate.
+```

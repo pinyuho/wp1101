@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { message } from 'antd'
 import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import Message from '../components/message'
@@ -50,12 +51,14 @@ const ChatBox = ({ me, friend }) => {
       } catch (e) {}
     }, [subscribeToMore, me, friend]);
 
-    if (loading) return <p> loading... </p>;
+    const handleLoading = () => {
+      message.loading({ content: "Loading...", duration: 0.5 })
+    }
 
     return (
         <Messages>
           {loading ? (
-              <p>Loading...</p>
+              handleLoading()
             ) : error ? (
               <p>Error :(((</p>
             ) : (

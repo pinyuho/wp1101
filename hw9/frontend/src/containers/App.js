@@ -52,6 +52,10 @@ function App() {
             message.info(content);
             break;
           }
+          case "loading": {
+            message.loading(content);
+            break;
+          }
           default:
               break;
         }
