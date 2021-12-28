@@ -1,21 +1,14 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-export const CHATBOX_QUERY = gql`
-  query chatBox(
-    $name1: String!
-    $name2: String!
-  ) {
-    chatBox(
-      name1: $name1
-      name2: $name2
-    ) {
-      name
-      messages {
-        sender {
-          name
-        }
-        body
-      }
+export const GET_TASKS_QUERY = gql`
+  query GetTasksQuery {
+    tasks {
+      # TODO 2 Please modify the query to get more properties
+      dueDate
+      id
+      content
+      title
+      status
     }
   }
 `;
