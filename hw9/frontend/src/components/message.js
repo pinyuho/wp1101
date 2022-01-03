@@ -10,7 +10,7 @@ const StyledMessage = styled.div`
         margin: 0 5px;
     }
 
-    & p:lastChild {
+    & p:last-Child {
         padding: 2px 5px;
         border-radius: 5px;
         background: #eee;
@@ -22,7 +22,8 @@ const StyledMessage = styled.div`
 const Message = ({ me, name, body }) => {
     return (
         <StyledMessage isMe={ me === name }>
-            <p>{name}</p> <p>{body}</p>
+            <p>{name}</p> 
+            <p>{body}</p>
         </StyledMessage>
     )
 }

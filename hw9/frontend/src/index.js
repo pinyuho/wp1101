@@ -49,7 +49,6 @@ const errorLink = onError(({ graphQLErrors }) => {
 })
 
 const client = new ApolloClient({
-  // link,
   cache: new InMemoryCache().restore({}),
   link: ApolloLink.from([errorLink, link]),
 });

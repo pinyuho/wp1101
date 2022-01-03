@@ -20,12 +20,17 @@ const Query = {
     );
   },
   async chatBox(parent, { name1, name2 }, { db }, info) {
-    const {chatBox, sender} = await checkMessage(db, name1, name2, "queryChatBox");
-    if (!chatBox) throw new Error("ChatBox not found for QueryChatBox");
+    let {chatBox, sender, to} = await checkMessage(db, name1, name2, "queryChatBox");
+
     // if (!chatBox) {
-    //   const chatBoxName = makeName(name1, name2); // names should be ordered
-    //   chatBox = await newChatBox(db, chatBoxName);
+    //   throw new Error("ChatBox not found for QueryChatBox " + name1 + "_" + name2);
     // }
+
+    // FIXME: duplicated chatrooms
+    if (!chatBox) {
+      const chatBoxName = makeName(name1, name2); // names should be ordered
+      chatBox = await newChatBox(db, chatBoxName);
+    }
     return chatBox;
   },
 };

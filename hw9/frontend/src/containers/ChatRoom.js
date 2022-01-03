@@ -46,8 +46,6 @@ const ChatRoom = ({ me, displayStatus }) => {
         showModal();
       } else { 
         removeChatBox(targetKey);
-        displayStatus({ type: "warning", msg: "ChatBox Deleted." });
-
       }
     };
   
@@ -65,10 +63,11 @@ const ChatRoom = ({ me, displayStatus }) => {
             name2: friend,
           }
       });
-          
+      // console.log(friend)
       addChatBox({title: friend});
+      
+      console.log("chatBoxes: ", chatBoxes)
       setIsModalVisible(false);
-      // displayStatus({ type: "success", msg: "ChatBox Created!" });
       setFriend('');
     }
   

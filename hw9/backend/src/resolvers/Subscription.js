@@ -2,7 +2,7 @@ import { checkUser } from '../util'
 
 const Subscription = {
     message: {
-        subscribe(parent, { from, to }, { db, pubsub }, info) {
+        subscribe(parent, args, { db, pubsub }, info) {
             return pubsub.asyncIterator('message');
         }
     },

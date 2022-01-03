@@ -6,6 +6,7 @@ const useChatBox = () => {
     const [activeKey, setActiveKey] = useState(`newTab${newTabIndex}`);
         
     const addChatBox = ({ title }) => { 
+        console.log("addChatBox", title)
         newTabIndex++;
         const tempActiveKey = `newTab${newTabIndex}`;
         setChatBoxes([...chatBoxes, { 

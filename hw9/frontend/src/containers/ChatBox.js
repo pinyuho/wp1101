@@ -31,15 +31,13 @@ const ChatBox = ({ me, friend }) => {
 
     useEffect(() => {
       try {
+        // console.log("into try chatBox")
         subscribeToMore({
           document: MESSAGE_SUBSCRIPTION,
-          variables: { from: me, to: friend },
+          variables: { name1: me, name2: friend },
           updateQuery: (prev, { subscriptionData }) => {
             if (!subscriptionData.data) return prev;
             const newMessage = subscriptionData.data.message.data;
-
-            console.log(newMessage);
-            console.log(prev);
 
             return {
               chatBox: {

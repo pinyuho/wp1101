@@ -14,11 +14,11 @@ const Mutation = {
       throw new Error("Missing ChatBox name for CreateChatBox");
     }
     if (!(await checkUser(db, name1, "createChatBox"))) {
-      console.log("User does not exist for CreateChatBox" + name1);
+      console.log("User does not exist for CreateChatBox " + name1);
       await newUser(db, name1);
     }
     if (!(await checkUser(db, name2, "createChatBox"))) {
-      console.log("User does not exist for CreateChatBox" + name2);
+      console.log("User does not exist for CreateChatBox " + name2);
       await newUser(db, name2);
     }
 
@@ -35,6 +35,7 @@ const Mutation = {
     const {chatBox, sender} = await checkMessage(db, from, to, "createMessage");
     if (!chatBox) throw new Error("ChatBox not found for CreateMessage");
     if (!sender) throw new Error("User not found: " + from);
+    console.log("sender: ", sender)
 
     const newMsg = await newMessage(db, sender, message);
     chatBox.messages.push(newMsg);
