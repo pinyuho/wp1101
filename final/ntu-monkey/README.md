@@ -1,9 +1,68 @@
+# (Group: 19 ) NTUMonkey_台大專屬任務媒合平台
+
+## 基本資料說明
+1. 組員：資管三何品諭、資管二洪韻蕎
+2. [deploy Link](https://ntu-monkey.herokuapp.com/)
+3. [demo Link]()
+### 介紹：
+台大生專屬的任務媒合平台，類似於小雞上工，註冊登入之後即可一面當Boss發佈任務請別人幫你完成日常所需，另一面也可以接別人的任務來賺取零用錢！
+
+### 使用流程：
+#### 註冊&登入：
+使用用戶名、密碼、台大學號等五樣資訊做註冊，登入則是使用用戶名以及密碼。
+ 
+#### 編輯Profile:
+可以到profile的地方查看以及編輯自己的資訊。
+ 
+#### 僱主方_發佈任務：
+點選右上角的圖像會出現menu，點選裏面的create new task 並填寫相關資訊即可創見新任務，此時可以在Boss中的myTask以及Applicants的allTasks看到。
+ 
+#### 應徵方_接任務：
+在左方的menu中點選Applicants的allTasks，點選任一個任務的Learn More，即可看到應徵按鈕，點選應徵後會跳出成功的通知並可以在pending的地方看到剛剛應徵的任務，此時代表僱主還沒決定要不要採用你。（自己不能應徵自己的）
+ 
+#### 僱主方_選應徵者：
+在左方的menu中點選Boss的myTask，點選任一個任務的Learn More，可看到第1行的應徵者，點選查看人才即可看到現在有誰應徵，並選擇一個特定的人執行你的任務，點選過後此任務在僱主方會被移到Boss的doneTask，在應徵方會被移到Applicant的myTask。如果是沒應徵到的人此任務會直接從他的清單中消失。
+ 
+#### 應徵方_完成任務：
+若應徵方接到任務之後可以在Applicant的myTask中點選完成，即代表做完此任務，此任務會被移到Applicant的doneTask中。
+#### 登出
+在右上角的menu中登出
+
+### 使用套件 / 框架
+ #### Frontend: 
+ 1. React.js
+ 2. React Hooks
+ 3. axios
+ 4. Material-ui
+ 5. notistack
+ #### Backend: Node.js
+ 1. http
+ 2. jsonwebtoken
+ 3. mongoose
+ 4. dotenv-defaults
+ 5. babel
+ 6. heroku
+
+### 心得
+#### 何品諭
+這次做專案是我第一次從零發想實作出一個app，在寫後端的時候也學到怎麼樣寫出更有架構的code，還有學到一些新的套件的用法還有怎麼deploy，總之學到很多，也感謝我的組員跟我一起完成～～
+#### 洪韻蕎
+學網服的整個學期可說是充滿困難以及打擊，在滿滿的作業跟快速到來的黑客松之中努力生存，慢慢的（其實才沒有慢慢的）從0開始學會前端到後端的基本用法，並可以跟品喻合作生出一個好像可以用的東西，在這次專案中也接觸了很多套件的用法，component的克制化、搭配，雖然中間因為網頁的排版而崩潰幾次，但看見成果還是覺得一切值得，也謝謝老師願意開這門課讓我可以初探網頁的世界。但最後我只想說，好累，我要去睡覺了。
+
 # ntu-monkey
 ## localhost安裝
 1. yarn install 
-2. 開啟前端：在此資料夾中yarn start
+2. 開啟前端及後端：在此資料夾中yarn start
 3. 依照backend中的.env.defaults製作出.env檔
-4. 開啟後端：在此資料夾中yarn server 
+
+### 填入 .env 的欄位內容
+```
+PORT=4000
+TOKEN_SECRET=09f26e402586e2faa8da4c98a35f1b20d6b033c60
+LOGIN_EXPIRE_DAYS=7 days
+SALT=
+```
+(並填入自己的MONGO_URL)
 
 ## 如果yarn start有問題且為mui的問題的話
 1. 至frontend的資料夾中
@@ -12,7 +71,7 @@
 4. yarn add @mui/icons-material
 5. yarn add @mui/lab
 ## 測試
-
+### 備註：有時候如果有更改的task沒出現的話，先按左方menu中其他選項再跳回來，謝謝
 ### 註冊
 1. 點選sign up 按鈕，輸入五樣資訊，
 2. 用戶名與已存在的重複或是沒填完五像資訊，跳出error的snackbar。
@@ -27,6 +86,7 @@
 1. 到左方profile的地方查看自己的資訊。
 2. 點選EDIT按鈕，並填寫相關資訊。
 3. 編輯成功。
+4. 再點選EDIT按鈕，可看到有預帶原本資訊。
  
  ### Task種類說明
  #### 1.Boss_MyTasks
@@ -74,15 +134,25 @@
 ### 應徵方_完成任務：
 1. 延續上一個測試，B借到任務後，任務會出現在myTasks，可點選任務中完成的按鈕，表示完成此任務
 2. 此任務會從mytasks移到DoneTask
+3. 頁面換跳轉到DoneTask
 
 ### 小功能
 1. 創見超過8個任務
 2. 可以順利翻頁！
+
+### 小細節
+## Learn more的內容不一樣
+1. 在BOSS方的任務Learn more中第1行是應徵者
+2. 在Applicants方的任務Learn more中第1行是刊登者
+## 頁面跳轉
+1. 在作許多動作時，結束後會有對應的跳轉頁面，方便查看結果。
+## 通知
+1. 在作許多動作時，結束後會有對應的snackbar出現，方便查看結果。
 ### 登出
 在右上角的menu中登出
 
 ## 組員分工
-### 何品喻
+### 何品諭
 1. 全部backend
 2. deploy
 
