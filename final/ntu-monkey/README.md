@@ -51,9 +51,14 @@
 
 # ntu-monkey
 ## localhost安裝
-1. yarn install 
-2. 開啟前端及後端：在此資料夾中yarn start
-3. 依照backend中的.env.defaults製作出.env檔
+1. 在此資料夾(ntu-monkey)下執行`yarn install`
+2. 依照此資料夾(ntu-monkey)中的.env.defaults製作出.env檔 (參照下列.env填入相關內容)
+3. 初始化後端(在資料夾ntu-monkey下執行以下指令)：
+- cd backend 
+- yarn
+4. 建立app並在此資料夾(ntu-monkey)中執行
+- yarn build
+- yarn start 
 
 ### 填入 .env 的欄位內容
 ```
