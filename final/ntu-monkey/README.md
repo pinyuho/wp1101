@@ -3,7 +3,7 @@
 ## 基本資料說明
 1. 組員：資管三何品諭、資管二洪韻蕎
 2. [deploy Link](https://ntu-monkey.herokuapp.com/)
-3. [demo Link]()
+3. [demo Link](https://drive.google.com/file/d/1-iLoK7vQ1YWwV_YcZfX3uNCu74xZgqFR/view?usp=sharing)
 ### 介紹：
 台大生專屬的任務媒合平台，類似於小雞上工，註冊登入之後即可一面當Boss發佈任務請別人幫你完成日常所需，另一面也可以接別人的任務來賺取零用錢！
 
